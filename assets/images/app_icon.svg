@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D7377"/>
+      <stop offset="100%" stop-color="#0A1628"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Squircle background -->
+  <rect x="32" y="32" width="960" height="960" rx="220" ry="220" fill="url(#bgGrad)"/>
+
+  <!-- Blood drop shape merging into ECG line -->
+  <g fill="none" stroke="white" stroke-width="32" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Blood drop (left side, outline only left arc) -->
+    <path d="M 460 280
+             C 460 280, 380 400, 380 480
+             C 380 540, 410 590, 460 610
+             C 510 590, 540 540, 540 480
+             C 540 400, 460 280, 460 280 Z"
+          fill="white" stroke="none"/>
+
+    <!-- ECG pulse line extending from drop -->
+    <path d="M 460 610
+             L 460 660
+             L 520 660
+             L 560 660
+             L 600 660
+             L 640 540
+             L 680 780
+             L 720 420
+             L 760 660
+             L 820 660
+             L 860 660"
+          fill="none"/>
+  </g>
+
+  <!-- Glowing prediction dot at the peak -->
+  <circle cx="720" cy="420" r="16" fill="#4FC3F7" filter="url(#glow)"/>
+  <circle cx="720" cy="420" r="8" fill="white"/>
+</svg>
