@@ -124,16 +124,19 @@ class DataCenterProvider extends ChangeNotifier {
   List<GlucoseRecord> get filteredRecords {
     if (_records.isEmpty) return [];
 
-    final now = DateTime.now();
+    final lastTimestamp = _records.map((r) => r.timestamp).reduce((a, b) => a.isAfter(b) ? a : b);
     late DateTime from;
 
     switch (_selectedRange) {
       case TimeRange.day:
-        from = now.subtract(const Duration(hours: 24));
+        from = lastTimestamp.subtract(const Duration(hours: 24));
+        break;
       case TimeRange.week:
-        from = now.subtract(const Duration(days: 7));
+        from = lastTimestamp.subtract(const Duration(days: 7));
+        break;
       case TimeRange.month:
-        from = now.subtract(const Duration(days: 30));
+        from = lastTimestamp.subtract(const Duration(days: 30));
+        break;
       case TimeRange.all:
         return _records;
     }
